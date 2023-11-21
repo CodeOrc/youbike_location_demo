@@ -21,8 +21,9 @@ export default function LocSelect({ locations, value = "", onChange }) {
         className={styles.location_option_box}
       >
         <div>
-          {locations.map((v) => (
+          {locations.map((v, i) => (
             <div
+              key={"loc" + i}
               value={v}
               onClick={(e) => {
                 onChange(e);

@@ -6,70 +6,6 @@
 
 }
 
-.header {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  border-bottom: 1px solid #EBEBEB;
-  padding: 0 12px;
-}
-
-.header_content {
-  width: 100%;
-  max-width: 1192px;
-  display: flex;
-  align-items: center;
-  gap: 60px
-}
-
-.logo {
-  width: 95px;
-  height: 95px;
-}
-
-.nav_bar {
-  width: calc(100% - 95px - 85px);
-  display: flex;
-  gap: 40px;
-}
-
-.nav {
-  list-style: none;
-  font-size: 18px;
-  font-weight: 700;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: var(--basic-green);
-}
-
-.nav_active {
-  color: var(--visited-green);
-}
-
-.login_btn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 100px;
-  min-width: 85px;
-  height: 40px;
-  background-color: var(--basic-green);
-  font-size: 18px;
-  font-weight: 500;
-  box-sizing: border-box;
-  color: var(--basic-white);
-  text-align: center;
-}
-
-.menu_btn {
-  display: none;
-  width: 24px;
-  height: 24px;
-  color: var(--basic-green);
-}
-
 .main_container {
   width: 100%;
   max-width: 1192px;
@@ -78,7 +14,7 @@
   align-items: center;
   padding: 0 12px;
   padding-top: 32px;
-  gap: 60px;
+  gap: 24px 0;
 }
 
 .filter_content {
@@ -86,60 +22,39 @@
   display: flex;
   gap: 150px;
 }
-.title{
+
+.title {
   margin: 22px 0;
   color: var(--basic-green);
   letter-spacing: 6px;
   font-size: 24px;
   font-weight: 900;
 }
+
 .location {
   display: flex;
   gap: 16px;
 }
 
 
-.search_box{
-  position: relative;
-  display: flex;
-
-}
-.search_input {
-  width: 227px;
-  height: 40px;
-  border-radius: 8px;
-  outline: none;
-  border: none;
-  padding: 8px 16px;
-  background-color: #F6F6F6;
-  box-sizing: border-box;
-}
-
-.search_btn {
-  position: absolute;
-  right:16px;
-  height: 40px;
-  color: var(--basic-grey);
-display: flex;
-align-items: center;
-justify-content: center;
-
-}
 
 .decorate {
   display: flex;
   flex-flow: column-reverse;
 }
-.area{
+
+.area {
   padding: 24px 0;
   box-sizing: border-box;
 }
-.check_box{
+
+.check_box {
   min-width: 100px;
   padding: 11px 0;
   box-sizing: border-box;
 }
-.check_box label{
+
+.check_box label {
   width: fit-content;
   display: flex;
   align-items: center;
@@ -147,15 +62,18 @@ justify-content: center;
   font-size: 18px;
   font-weight: 400;
 }
-.area_content{
+
+.area_content {
   display: flex;
   flex-wrap: wrap;
-  gap:15px 24px;
+  gap: 15px 24px;
 }
-.area_check_input{
+
+.area_check_input {
   display: none;
 }
-.area_check_input+span{
+
+.area_check_input+span {
   display: block;
   display: flex;
   justify-content: center;
@@ -163,16 +81,20 @@ justify-content: center;
   width: 18px;
   height: 18px;
   border: 2px solid var(--basic-grey);
-box-sizing: border-box;}
-  .area_check_input:checked+span{
-    
-    border-color: transparent;
-background-color: var(--basic-green);}
-.area_check_input:checked+span:after{
-  
+  box-sizing: border-box;
+}
+
+.area_check_input:checked+span {
+  border-color: transparent;
+  background-color: var(--basic-green);
+}
+
+.area_check_input:checked+span:after {
   content: "done";
   font-size: 18px;
-color: var(--basic-white);}
+  color: var(--basic-white);
+}
+
 .info_content {
   width: 100%;
   display: flex;
@@ -185,6 +107,7 @@ color: var(--basic-white);}
 .info_theader {
   background-color: var(--basic-green);
   width: 100%;
+  min-width: 530px;
   height: 66px;
   display: flex;
   align-items: center;
@@ -202,11 +125,20 @@ color: var(--basic-white);}
 
 .info_tr {
   width: 100%;
+  min-width: 530px;
   height: 72px;
   display: flex;
+  justify-content: center;
   align-items: center;
   color: var(--basic-black);
   font-size: 16px;
+}
+
+.info_theader .td_tot,
+.info_theader .td_sbi,
+.info_theader .td_sna,
+.info_theader .td_area {
+  cursor: pointer;
 }
 
 .info_theader div,
@@ -219,11 +151,13 @@ color: var(--basic-white);}
 .td_location,
 .td_area {
   width: 12%;
+  min-width: 80px;
 }
 
 .td_tot,
 .td_sbi {
   width: 18%;
+  min-width: 60px;
 }
 
 .info_tr .td_tot,
@@ -234,18 +168,28 @@ color: var(--basic-white);}
 
 .td_sna {
   width: 40%;
+  min-width: 250px;
 }
 
 @media screen and (max-width: 768px) {
 
-  .menu_btn {
-    display: block;
+  .filter {
+    width: 100%;
 
   }
-.location{
-  flex-wrap: wrap;
-}
+
+  .location {
+    width: 100%;
+    flex-wrap: wrap;
+    flex-direction: column-reverse;
+  }
+
   .decorate {
     display: none;
+  }
+
+
+  .info_content {
+    overflow: scroll;
   }
 }

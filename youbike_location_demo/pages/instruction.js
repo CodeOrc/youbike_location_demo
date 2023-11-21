@@ -12,27 +12,15 @@ const locations = [
     locationName: "臺北市",
     api: "https://tcgbusfs.blob.core.windows.net/dotapp/youbike/v2/youbike_immediate.json",
   },
-  { locationName: "新北市", api: "" },
-  { locationName: "新竹縣", api: "" },
-  { locationName: "新竹市", api: "" },
-  { locationName: "新竹科學園區", api: "" },
-  { locationName: "苗栗縣", api: "" },
-  { locationName: "臺中市", api: "" },
-  { locationName: "嘉義市", api: "" },
-  { locationName: "臺南市", api: "" },
-  { locationName: "高雄市", api: "" },
-  { locationName: "屏東縣", api: "" },
 ];
 
-export default function Home() {
+export default function Instruction() {
   const [loc, setLoc] = useState("");
   const [data, setData] = useState({
     data: [],
     areaList: [],
     currentPage: 1,
     search: "",
-    orderBy: "",
-    asce: true,
   });
 
   //25/perpage
@@ -47,8 +35,6 @@ export default function Home() {
           areaList: getAllAreas(data),
           currentPage: 1,
           search: "",
-          orderBy: "",
-          asce: true,
         });
       })
       .catch((ex) => {
@@ -77,40 +63,19 @@ export default function Home() {
         ? { ...v, checked: !v.checked }
         : { ...v };
     });
-    setData({
-      ...data,
-      areaList: newArr,
-      currentPage: 1,
-      search: "",
-      orderBy: "",
-      asce: true,
-    });
+    setData({ ...data, areaList: newArr, currentPage: 1, search: "" });
   };
   const handleCheckAll = (e) => {
     if (e.target.checked) {
       const newArr = data.areaList.map((v) => {
         return { ...v, checked: true };
       });
-      setData({
-        ...data,
-        areaList: newArr,
-        currentPage: 1,
-        search: "",
-        orderBy: "",
-        asce: true,
-      });
+      setData({ ...data, areaList: newArr, currentPage: 1, search: "" });
     } else {
       const newArr = data.areaList.map((v) => {
         return { ...v, checked: false };
       });
-      setData({
-        ...data,
-        areaList: newArr,
-        currentPage: 1,
-        search: "",
-        orderBy: "",
-        asce: true,
-      });
+      setData({ ...data, areaList: newArr, currentPage: 1, search: "" });
     }
   };
   const filterData = (data) => {
@@ -121,7 +86,6 @@ export default function Home() {
       .map((v) => {
         return v.areaName;
       });
-
     return data.data
       .filter((v, i) => {
         return filterArr.indexOf(v.sarea) >= 0;
@@ -131,21 +95,6 @@ export default function Home() {
           return v.sna.includes(data.search.trim());
         } else {
           return v;
-        }
-      })
-      .sort((a, b) => {
-        if (data.orderBy == "sarea" || data.orderBy == "sna") {
-          if (data.asce) {
-            return a[data.orderBy].localeCompare(b[data.orderBy], "zh-hant");
-          } else {
-            return b[data.orderBy].localeCompare(a[data.orderBy], "zh-hant");
-          }
-        } else {
-          if (data.asce) {
-            return a[data.orderBy] - b[data.orderBy];
-          } else {
-            return b[data.orderBy] - a[data.orderBy];
-          }
         }
       });
   };
@@ -160,14 +109,6 @@ export default function Home() {
   const handlePage = (page) => {
     setData({ ...data, currentPage: page });
   };
-  const handleOrderBy = (order) => {
-    if (data.orderBy == order) {
-      setData({ ...data, asce: false });
-    } else {
-      setData({ ...data, orderBy: order, asce: true });
-    }
-  };
-
   useEffect(() => {
     if (loc !== "") {
       const url = locations.filter((v) => v.locationName == loc)[0].api;
@@ -245,38 +186,10 @@ export default function Home() {
           <div className={styles.info_content}>
             <div className={styles.info_theader}>
               <div className={styles.td_location}>縣市</div>
-              <div
-                className={styles.td_area}
-                onClick={() => {
-                  handleOrderBy("sarea");
-                }}
-              >
-                區域
-              </div>
-              <div
-                className={styles.td_sna}
-                onClick={() => {
-                  handleOrderBy("sna");
-                }}
-              >
-                站點名稱
-              </div>
-              <div
-                className={styles.td_tot}
-                onClick={() => {
-                  handleOrderBy("sbi");
-                }}
-              >
-                可借車輛
-              </div>
-              <div
-                className={styles.td_sbi}
-                onClick={() => {
-                  handleOrderBy("bemp");
-                }}
-              >
-                可還空位
-              </div>
+              <div className={styles.td_area}>區域</div>
+              <div className={styles.td_sna}>站點名稱</div>
+              <div className={styles.td_tot}>可借車輛</div>
+              <div className={styles.td_sbi}>可還空位</div>
             </div>
             <div className={styles.info_tbody}>
               {data.data.length <= 0 ? (
